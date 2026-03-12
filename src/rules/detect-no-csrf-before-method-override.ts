@@ -22,11 +22,12 @@ export const detectNoCsrfBeforeMethodOverrideRule = {
     },
   },
   create(context) {
+    const sourceCode = context.sourceCode || context.getSourceCode();
     let csrf = false;
 
     return {
       CallExpression(node) {
-        const token = (context.sourceCode || context.getSourceCode()).getTokens(node)[0];
+        const token = sourceCode.getTokens(node)[0];
         const nodeValue = token.value;
 
         if (nodeValue === 'express') {

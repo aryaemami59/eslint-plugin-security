@@ -27,9 +27,10 @@ export const detectUnsafeRegexRule = {
     },
   },
   create(context) {
+    const sourceCode = context.sourceCode || context.getSourceCode();
     return {
       Literal(node) {
-        const token = (context.sourceCode || context.getSourceCode()).getTokens(node)[0];
+        const token = sourceCode.getTokens(node)[0];
         const nodeType = token.type;
         const nodeValue = token.value;
 
